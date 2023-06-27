@@ -1,18 +1,16 @@
-/*
- * Project Lab5
- * Description:
- * Author:
- * Date:
- */
+SYSTEM_MODE(MANUAL);
+SYSTEM_THREAD(ENABLED);
 
-// setup() runs once, when the device is first turned on.
+int lowest = 4095;
+int highest = 0;
+
 void setup() {
-  // Put initialization like pinMode and begin functions here.
-
+  pinMode(D5, OUTPUT);
+  pinMode(D7, INPUT);
 }
 
-// loop() runs over and over again, as quickly as it can execute.
 void loop() {
-  // The core of your code will likely live here.
-
+  lowest = min(lowest, analogRead(A0));
+  highest = max(highest, analogRead(A0));
+  analogWrite(D5, map(analogRead(A0), lowest, highest, 0, 255));
 }
